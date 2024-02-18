@@ -4,14 +4,12 @@ import CommonLoader from "../common/CommonLoader";
 import { useGetLoginUserDetailQuery } from "../services/rtk/authApi/authApiSlice";
 import { PrivateLayoutProps } from "../services/types/AllTypes";
 import Sidebar from "./Sidebar";
-
-
-
+import Header from './Header';
 
 
 const PrivateLayout: React.FC<PrivateLayoutProps> = ({ children }) => {
     const { data: getLoginUserDetail, isLoading } = useGetLoginUserDetailQuery({});
-    // console.log(getLoginUserDetail, "getLoginUserDetail")
+    console.log(getLoginUserDetail, "getLoginUserDetail")
 
     const authToken = localStorage.getItem("authToken");
     useEffect(() => {
@@ -29,12 +27,16 @@ const PrivateLayout: React.FC<PrivateLayoutProps> = ({ children }) => {
     }
 
     return (
-        <Box className="flex w-full">
-            <Sidebar />
-            <Box className="w-full">
-                {children}
+        <>
+
+            <Box className="flex w-full">
+                <Sidebar />
+                <Box className="w-full">
+                    <Header />
+                    {children}
+                </Box>
             </Box>
-        </Box>
+        </>
     );
 };
 

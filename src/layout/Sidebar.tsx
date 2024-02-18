@@ -1,34 +1,26 @@
 import { Box, Typography } from "@mui/material"
-import { Link, useNavigate, useLocation } from "react-router-dom"
-import GroupIcon from '@mui/icons-material/Group';
-import TodoIcon from '../../src/assets/images/taskIcon.png'
+import { Link, useLocation } from "react-router-dom"
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import TodoIcon from '../../src/assets/images/todoo.png'
 import { NavItemsProps } from "../services/types/AllTypes";
 
-
-
 const Sidebar = () => {
-    const navigate = useNavigate()
     const location = useLocation();
-
     const navList: NavItemsProps[] = [
+        // sidebar navigation 
         {
             id: 2,
-            name: 'Todo',
+            name: 'Todo List',
             toPath: '/todo',
-            icon: <GroupIcon />
-
+            icon: <FormatListBulletedIcon />
         },
     ]
 
-    const logoUt = () => {
-        localStorage.clear()
-        navigate('/')
-
-    }
-
     return (
         <Box className="w-[300px] bg-[#406C86] text-white h-[100vh] py-6">
-            <img src={TodoIcon} className="w-full h-[100px]" />
+            <div className="flex justify-start px-3 h-[100px]">
+                <img src={TodoIcon} className="" />
+            </div>
             {
                 navList.map((navItem) => {
                     return (
@@ -45,10 +37,7 @@ const Sidebar = () => {
                     )
                 })
             }
-            <Box className='flex items-end '>
 
-                <Typography variant="h6" onClick={logoUt}>Logout</Typography>
-            </Box>
         </Box>
     )
 }

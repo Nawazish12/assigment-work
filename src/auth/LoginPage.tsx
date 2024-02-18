@@ -5,6 +5,8 @@ import LoginPageIcon from '../../src/assets/icons/LoginIcon.svg'
 import { useNavigate } from 'react-router-dom';
 import { useLoginMutation } from '../services/rtk/authApi/authApiSlice';
 import { LoginResponse } from '../services/types/AllTypes';
+import { SuccessToast } from '../common/SuccessToast';
+import { ErrorToast } from '../common/ErrorToast';
 
 
 const LoginPage: React.FC = () => {
@@ -25,7 +27,10 @@ const LoginPage: React.FC = () => {
             if (res) {
                 navigate('/todo')
                 localStorage.setItem('authToken', res.token)
+                SuccessToast('Successfully Login')
             }
+        }).catch((err) => {
+            ErrorToast(err?.data?.message)
         })
     };
     useEffect(() => {
@@ -68,13 +73,20 @@ const LoginPage: React.FC = () => {
                         </Box>
                         <Button
                             disabled={!username || !password}
-                            sx={{ background: '#468693', color: 'white' }}
+                            sx={{
+                                background: '#468693',
+                                color: 'white',
+                                '&:hover': {
+                                    backgroundColor: '#468693',
+                                    color: 'white',
+                                },
+                            }}
                             type='submit'
                             className='w-full shadow-xl !py-2.5 !text-[17px] !font-[500]'
                         >
                             {
-                                isLoading ? <Box sx={{ display: 'flex' }}>
-                                    <CircularProgress />
+                                isLoading ? <Box sx={{ display: 'flex', }}>
+                                    <CircularProgress size={30} sx={{ color: 'white' }} />
                                 </Box> : 'Login'
                             }
                         </Button>
