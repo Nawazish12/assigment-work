@@ -9,7 +9,11 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '../services/rtk/userSlice';
 import { LoginUserDetail } from '../services/types/AllTypes';
 
-type GetLoginUserDetailQueryResult = LoginUserDetail | undefined;
+type GetLoginUserDetailQueryResult = {
+    data?: LoginUserDetail;
+    isLoading: boolean;
+    isError: boolean; 
+};
 
 const PrivateLayout: React.FC<PrivateLayoutProps> = ({ children }) => {
     const dispatch = useDispatch()
