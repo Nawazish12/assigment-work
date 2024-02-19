@@ -3,8 +3,6 @@ export default (build) =>
     query: () => ({
       url: 'auth/me',
       method: 'GET',
-     
-   
     }),
     providesTags: ['currentUser'],
      
