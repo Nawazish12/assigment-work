@@ -5,11 +5,15 @@ import { useGetLoginUserDetailQuery } from "../services/rtk/authApi/authApiSlice
 import { PrivateLayoutProps } from "../services/types/AllTypes";
 import Sidebar from "./Sidebar";
 import Header from './Header';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../services/rtk/userSlice';
+import { LoginUserDetail } from '../services/types/AllTypes';
 
+type GetLoginUserDetailQueryResult = LoginUserDetail | undefined;
 
 const PrivateLayout: React.FC<PrivateLayoutProps> = ({ children }) => {
-    const { data: getLoginUserDetail, isLoading } = useGetLoginUserDetailQuery({});
-    console.log(getLoginUserDetail, "getLoginUserDetail")
+    const dispatch = useDispatch()
+    const { data: getLoginUserDetail, isLoading } = useGetLoginUserDetailQuery<GetLoginUserDetailQueryResult>({});
 
     const authToken = localStorage.getItem("authToken");
     useEffect(() => {
@@ -17,6 +21,19 @@ const PrivateLayout: React.FC<PrivateLayoutProps> = ({ children }) => {
             window.location.href = "/";
         }
     }, [authToken])
+
+
+    useEffect(() => {
+        if (getLoginUserDetail) {
+            dispatch(setUser({
+                id: getLoginUserDetail.id,
+                username: getLoginUserDetail.username,
+                image: getLoginUserDetail.image
+            }))
+        }
+
+    }, [getLoginUserDetail, dispatch])
+
 
     if (isLoading) {
         return (

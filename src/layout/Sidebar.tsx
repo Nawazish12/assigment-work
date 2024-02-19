@@ -17,7 +17,7 @@ const Sidebar = () => {
     ]
 
     return (
-        <Box className="w-[300px] bg-[#406C86] text-white h-[100vh] py-6">
+        <Box className="w-[300px] bg-[#406C86] text-white h-[100vh] max-lg:hidden ">
             <div className="flex justify-start px-3 h-[100px]">
                 <img src={TodoIcon} className="" />
             </div>

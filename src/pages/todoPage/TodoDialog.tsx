@@ -11,6 +11,9 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { TodoDialogProps } from '../../services/types/AllTypes.js';
 import { useAddTodoMutation } from '../../services/rtk/todoapi/TodoSlice.js'
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store.js';
+
 
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & {
@@ -21,6 +24,8 @@ const Transition = React.forwardRef(function Transition(
     return <Slide direction="up" ref={ref} {...props} />;
 });
 const TodoDialog: React.FC<TodoDialogProps> = ({ open, setOpen, }) => {
+    const user = useSelector((state: RootState) => state.user);
+
     const [todoName, setTodoName] = React.useState('');
     const [isChecked, setIsChecked] = React.useState<boolean>(false);
     const [addTodo] = useAddTodoMutation()
@@ -41,7 +46,7 @@ const TodoDialog: React.FC<TodoDialogProps> = ({ open, setOpen, }) => {
         const body = {
             todo: todoName,
             completed: isChecked,
-            userId: 15
+            userId: user?.id
         }
         addTodo(body).unwrap().then(() => {
             handleClose()

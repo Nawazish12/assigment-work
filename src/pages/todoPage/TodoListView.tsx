@@ -29,13 +29,13 @@ const TodoListView: React.FC = () => {
 
     return (
         <>
-            <Box className="bg-[#F8F8FF] h-[100vh]">
-                <Box className="px-6 py-10 w-[80%] m-auto">
+            <Box className="bg-[#F8F8FF] ">
+                <Box className="px-6 py-10 w-[80%] m-auto max-lg:w-full">
                     <Typography variant="h3" className="items-center justify-center flex">
                         Todo List
                     </Typography>
                     <Button variant="contained" onClick={() => setOpen(true)}>Add Todo</Button>
-                    <Box className="bg-[#ECEDF6] mt-3 rounded-md px-6 py-6">
+                    <Box className="bg-[#ECEDF6] mt-3 rounded-md px-6 py-6 max-h-[600px] overflow-auto">
                         {isLoading ? (
                             <>
                                 <CommonSkeleton count={5} />

@@ -41,3 +41,18 @@ export interface RouteConfig {
     completed: boolean;
     userId: boolean
   }
+
+ export interface UserState {
+    id: number;
+    username: string;
+    image: string;
+  }
+
+  export  interface LoginUserDetail {
+      id: number;
+      username: string;
+      image: string;
+      isLoading: boolean
+  }
+  
+  
